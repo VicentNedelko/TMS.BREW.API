@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TMS.BREW.API.Core.Models
 {
+    [Serializable]
     public class Brewery
     {
         public int id { get; set; }
