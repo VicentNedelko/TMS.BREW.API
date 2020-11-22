@@ -24,6 +24,6 @@ namespace TMS.BREW.API.Core.Interfaces
         public Task<IEnumerable<Brewery>> RequestDataByCity(string s);
         public Task<IEnumerable<Brewery>> RequestFullList();
         public Task<IEnumerable<Brewery>> RequestByState(string s);
-        public Task<IEnumerable<Brewery>> RequestByType(string s);
+        public Task<IEnumerable<Brewery>> RequestByType();
     }
 }
