@@ -90,6 +90,16 @@ namespace TMS.BREW.API.UI
                 formatter.Serialize(fs, brewList);
             }
         }
+        public static IEnumerable<Brewery> GetFromBin(string filePath)
+        {
+            IEnumerable<Brewery> breweries = new List<Brewery>();
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fsr = new FileStream(filePath, FileMode.OpenOrCreate))
+            {
+                breweries = (IEnumerable<Brewery>)formatter.Deserialize(fsr);
+            }
+            return breweries;
+        }
         public static void PrintList(IEnumerable<Brewery> listToPrint)
         {
             foreach(Brewery brewery in listToPrint)
