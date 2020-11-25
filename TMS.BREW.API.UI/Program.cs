@@ -6,6 +6,7 @@ using TMS.BREW.API.Core.Models;
 using TMS.BREW.API.Core.Services;
 using TMS.BREW.API.Core.Commons;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace TMS.BREW.API.UI
 {
@@ -96,6 +97,11 @@ namespace TMS.BREW.API.UI
                     case ConsoleKey.E:
                         Environment.Exit(0);
                         break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Error! Wrong key entered.");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
                 }
             }
         }
@@ -152,18 +158,31 @@ namespace TMS.BREW.API.UI
             {
                 Console.WriteLine($"File not found - {e.Message}");
             }
+            catch(SerializationException e)
+            {
+                Console.WriteLine($"Serialization exception - {e.Message}");
+            }
             return breweries;
         }
         public static void PrintList(IEnumerable<Brewery> listToPrint)
         {
-            foreach(Brewery brewery in listToPrint)
+            if (listToPrint.Count() == 0)
             {
-                Console.WriteLine("-------");
-                Console.WriteLine($"ID : {brewery.id}");
-                Console.WriteLine($"Name : {brewery.name}");
-                Console.WriteLine($"City : {brewery.city}");
-                Console.WriteLine($"Type - {brewery.brewery_type}");
-                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error! No data found. Check the file existence.");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                foreach (Brewery brewery in listToPrint)
+                {
+                    Console.WriteLine("-------");
+                    Console.WriteLine($"ID : {brewery.id}");
+                    Console.WriteLine($"Name : {brewery.name}");
+                    Console.WriteLine($"City : {brewery.city}");
+                    Console.WriteLine($"Type - {brewery.brewery_type}");
+                    Console.WriteLine();
+                }
             }
         }
     }
