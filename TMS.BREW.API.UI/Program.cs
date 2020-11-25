@@ -74,6 +74,25 @@ namespace TMS.BREW.API.UI
                         MoveToBinFile(fullList, commons.filePathFull);
                         PrintList(fullList);
                         break;
+                    case ConsoleKey.O:
+                        Console.Clear();
+                        FileMenuPrint();
+                        switch (Console.ReadKey().Key)
+                        {
+                            case ConsoleKey.A:
+                                PrintList(GetFromBin(commons.filePathName));
+                                break;
+                            case ConsoleKey.I:
+                                PrintList(GetFromBin(commons.filePathCity));
+                                break;
+                            case ConsoleKey.Y:
+                                PrintList(GetFromBin(commons.filePathType));
+                                break;
+                            default:
+                                Console.WriteLine("Error! Wrong key entered.");
+                                break;
+                        }
+                        break;
                     case ConsoleKey.E:
                         Environment.Exit(0);
                         break;
@@ -90,7 +109,24 @@ namespace TMS.BREW.API.UI
             Console.WriteLine("Search by City - \"C\"");
             Console.WriteLine("Search by Type - \"T\"");
             Console.WriteLine("Show full list - \"F\"");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("+++++++++++++++++++++++");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Open recent query - \"O\"");
             Console.WriteLine("Exit - \"E\"");
+            Console.Write("Enter : ");
+        }
+        public static void FileMenuPrint()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("-----------------------");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Open Searched by Name - \"A\"");
+            Console.WriteLine("Open Searched by City - \"I\"");
+            Console.WriteLine("Open Searched by Type - \"Y\"");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("-----------------------");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Enter : ");
         }
         public static void MoveToBinFile(IEnumerable<Brewery> brewList, string filePath)
@@ -105,9 +141,16 @@ namespace TMS.BREW.API.UI
         {
             IEnumerable<Brewery> breweries = new List<Brewery>();
             BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fsr = new FileStream(filePath, FileMode.OpenOrCreate))
+            try
             {
-                breweries = (IEnumerable<Brewery>)formatter.Deserialize(fsr);
+                using (FileStream fsr = new FileStream(filePath, FileMode.OpenOrCreate))
+                {
+                    breweries = (IEnumerable<Brewery>)formatter.Deserialize(fsr);
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine($"File not found - {e.Message}");
             }
             return breweries;
         }
