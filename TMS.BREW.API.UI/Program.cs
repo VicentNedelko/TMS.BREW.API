@@ -23,6 +23,7 @@ namespace TMS.BREW.API.UI
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.N:
+                        Console.WriteLine();
                         Console.WriteLine("+++++++");
                         Console.Write("Enter Name : ");
                         var nameBrewery =
@@ -40,6 +41,7 @@ namespace TMS.BREW.API.UI
                         }
                         break;
                     case ConsoleKey.C:
+                        Console.WriteLine();
                         Console.WriteLine("+++++++");
                         Console.Write("Enter city : ");
                         var cityBrewery = reqService.RequestDataByCity(Console.ReadLine()).Result;
@@ -56,6 +58,7 @@ namespace TMS.BREW.API.UI
                         }
                         break;
                     case ConsoleKey.T:
+                        Console.WriteLine();
                         Console.WriteLine("+++++++");
                         var typeBrewery = reqService.RequestByType().Result;
                         if (typeBrewery.Count() != 0)
@@ -176,6 +179,7 @@ namespace TMS.BREW.API.UI
             {
                 foreach (Brewery brewery in listToPrint)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("-------");
                     Console.WriteLine($"ID : {brewery.id}");
                     Console.WriteLine($"Name : {brewery.name}");

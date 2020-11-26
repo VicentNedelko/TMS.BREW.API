@@ -36,16 +36,16 @@ namespace TMS.BREW.API.Core.Services
         {
             Types type = Types.bar;
             Console.WriteLine("Enter type : ");
-            Console.WriteLine(  "micro - m" + "; " +
-                                "nano - n"  + "; " +
-                                "regional - r" + "; " +
-                                "brewpub - b" + "; " +
-                                "large - l" + "; " +
-                                "planning - p" + "; " +
-                                "bar - a" + "; " +
-                                "contract - c" + "; " +
-                                "proprietor - h" + "; " +
-                                "closed - x");
+            Console.WriteLine(  "micro - m" + ";\n " +
+                                "nano - n"  + ";\n " +
+                                "regional - r" + ";\n " +
+                                "brewpub - b" + ";\n " +
+                                "large - l" + ";\n " +
+                                "planning - p" + ";\n " +
+                                "bar - a" + ";\n " +
+                                "contract - c" + ";\n " +
+                                "proprietor - h" + ";\n " +
+                                "closed - x" + ";\n");
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.M:
